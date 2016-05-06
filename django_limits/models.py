@@ -11,7 +11,6 @@ MODEL_LIMITS = getattr(settings, 'MODEL_LIMITS')
 @receiver(pre_save)
 def check_limits(sender, **kwargs):
     if sender in MODEL_LIMITS.keys():
-        queryset = MODEL_LIMITS[sender].get('queryset',sender.objects)
+        queryset = MODEL_LIMITS[sender].get('queryset', sender.objects)
         if queryset.count() > MODEL_LIMITS[sender]['max']:
             raise exceptions.LimitExceeded(model=sender,details=MODEL_LIMITS[sender])
-
