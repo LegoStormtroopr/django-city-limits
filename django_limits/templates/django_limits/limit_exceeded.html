@@ -1,0 +1,11 @@
+{% extends "aristotle_mdr/base.html" %}
+
+{% block title %}Forbbiden{% endblock %}
+{% block content %}
+<h1 class="unauthorised">Limit Exceeded - {{ exception.details.message }}</h1>
+<p>
+You have reached the limit of {{model_name_plural}} you can create, your current plan allows for a maximum of {{exception.details.max}}, please delete
+or deactivate existing {{model_name_plural}} or upgrade.
+</p>
+
+{% endblock %}
