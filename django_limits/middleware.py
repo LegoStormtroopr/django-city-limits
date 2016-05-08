@@ -6,4 +6,3 @@ class LimitExceededMiddleware(object):
         if isinstance(exception, LimitExceeded):
             return limit_exceeded_view(request, limit_exception=exception)
         return None
-
