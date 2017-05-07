@@ -7,6 +7,10 @@ For example, the number of active users, the number of posts per user, or the nu
 This django module allows you to easily setup predefined, hardcoded limits to
 enforce these kinds of restrictions.
 
+0. Install ``django-city-limits`` from PyPI::
+
+    pip install django-city-limits
+
 1. Add ``django_limits`` to your ``INSTALLED_APPS``:
 
     INSTALLED APPS = [
@@ -67,7 +71,7 @@ A rules dictionary can contain the following keys:
 
 * ``limit`` (required - The total number of the given model allowed, or if there is a queryset, the total allowed for that queryset
 * ``message`` - The message shown when a user tries to exceed this number
-* ``filterset`` - A set of django Q filters that define the types of models to restrict on, if this is not set the total number of the model in the database is used (e.g ``Model.objects.all()``)
+* ``filterset`` - A django Q filters that defines the types of models to restrict on, if this is not set the total number of the model in the database is used (e.g ``Model.objects.all()``)
 * ``template`` - The template used to render the page explaining the limit restriction, defaults to ``django_limits/limit_exceeded.html``
 
 An example rule is below for a widget is below.::
@@ -98,3 +102,5 @@ How it works
 Django limtis installs a ``pre_save`` signal for every model, and checks against the rules, and
 to prevent the save from finishing throws a ``LimitExceeded`` exception which is caught by the
 middleware, which in turn renders a page with a HTTP 403 error.
+
+Apologies to Tina Turner.

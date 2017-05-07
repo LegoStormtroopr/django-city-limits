@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+
 @login_required
 def limit_exceeded_view(request, limit_exception, template=None):
     if template is None:

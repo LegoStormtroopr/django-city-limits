@@ -1,6 +1,7 @@
 from django_limits.exceptions import LimitExceeded
 from django_limits.views import limit_exceeded_view
 
+
 class LimitExceededMiddleware(object):
     def process_exception(self, request, exception):
         if isinstance(exception, LimitExceeded):

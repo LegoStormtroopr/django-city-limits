@@ -2,9 +2,10 @@ from django.db.models import Q
 from django_limits.limiter import Limiter
 from .models import Horse, House, Motorcycle, Liquor, Ration
 
+
 class NutbushLimiter(Limiter):
     rules = {
-        House : [
+        House: [
             {
                 'limit': 4,
                 'message': "A church house gin house, a school house out house"
@@ -12,19 +13,19 @@ class NutbushLimiter(Limiter):
             {
                 'limit': 0,
                 'message': "A church house gin house, a school house out house",
-                'filterset': ~Q(name__in=['church','gin','school','out'])
+                'filterset': ~Q(name__in=['church', 'gin', 'school', 'out'])
             },
         ],
-        Motorcycle : {
+        Motorcycle: {
             'limit': 0,
             'message': "Twenty-five was the speed limit, motorcycle not allowed in it"
         },
-        Liquor : {
+        Liquor: {
             'limit': 0,
             'message': "No whiskey for sale, you can't cop no bail",
             'queryset': Q(name='Whiskey')
         },
-        Ration : [
+        Ration: [
             {
                 'limit': 2,
                 'message': "Salt pork and molasses is all you get in jail",
@@ -36,7 +37,7 @@ class NutbushLimiter(Limiter):
                 'filterset': ~(Q(name='Salt pork') | Q(name='Molasses'))
             },
         ],
-        Horse : {
+        Horse: {
             'limit': 1,
             'message': "One horse town you have to watch"
         }

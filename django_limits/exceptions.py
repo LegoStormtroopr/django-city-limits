@@ -9,4 +9,7 @@ class LimitExceeded(exceptions.PermissionDenied):
         super(LimitExceeded, self).__init__(*args, **kwargs)
 
     def __str__(self):
-        return "LimitExceeded - Your plan only allows for %s %s"%(self.details['max'],self.model._meta.verbose_name_plural)
+        return "LimitExceeded - Your plan only allows for {number} {name}".format(
+            number=self.details['max'],
+            name=self.model._meta.verbose_name_plural
+        )

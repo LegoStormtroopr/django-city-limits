@@ -20,7 +20,7 @@ class LimitsTestCase(TestCase):
 
         # Dr. House can be in princeton
         dr = models.House.objects.create(name='Doctor Gregory', city=self.princeton)
-        
+
         with self.assertRaises(LimitExceeded):
             # No Dr. House cannot move to Nutbush!
             dr.city = self.nutbush
@@ -48,4 +48,3 @@ class LimitsTestCase(TestCase):
         with self.assertRaises(LimitExceeded):
             # No more molasses
             models.Ration.objects.create(name='Molasses', city=self.nutbush)
-

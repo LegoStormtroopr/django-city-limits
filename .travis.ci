@@ -1,0 +1,18 @@
+# Lets run on the new infrastructure
+sudo: false
+
+language: python
+python:
+  - "3.5"
+  - "2.7"
+
+install:
+  - pip install coveralls
+  - pip install tox
+
+script:
+  - tox --skip-missing-interpreters
+
+after_success:
+  - coveralls
+  - codecov

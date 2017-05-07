@@ -5,20 +5,21 @@ from django.db.models.sql.where import WhereNode
 
 
 LOOKUPS = {
-    'in': lambda x,y: x in y,
-    'exact': lambda x,y: x == y,
-    'iexact': lambda x,y: str(x).lower() == str(y).lower(),
-    'lt': lambda x,y: x < y,
-    'lte': lambda x,y: x <= y,
-    'gt': lambda x,y: x > y,
-    'gte': lambda x,y: x >= y,
+    'in': lambda x, y: x in y,
+    'exact': lambda x, y: x == y,
+    'iexact': lambda x, y: str(x).lower() == str(y).lower(),
+    'lt': lambda x, y: x < y,
+    'lte': lambda x, y: x <= y,
+    'gt': lambda x, y: x > y,
+    'gte': lambda x, y: x >= y,
 }
+
 
 class Limiter(object):
     rules = {
         # ModelClass: [rule, rule, etc...]
     }
-    
+
     def __call__(self, model, **kwargs):
         instance = kwargs['instance']
         if model in self.rules.keys():
@@ -81,11 +82,11 @@ class Limiter(object):
 
         lookup = None
         for lookup in LOOKUPS.keys():
-            if join.endswith('__%s'%lookup):
+            if join.endswith('__%s' % lookup):
                 join, lookup = join.rsplit('__', 1)
                 break
 
         for jump in join.split('__'):
             value = getattr(value, jump)
+
         return value, lookup
-    
