@@ -3,6 +3,8 @@ from django.apps import apps
 
 INSTALLED_APPS = ('django_limits', 'django_limits.tests')
 
+MIDDLEWARE_CLASSES = ['django_limits.middleware.LimitExceededMiddleware']
+
 SECRET_KEY = 'sorry_tina_turner_and_hugh_laurie'
 MODEL_LIMIT_CLASS = 'django_limits.tests.limiter.NutbushLimiter'
 

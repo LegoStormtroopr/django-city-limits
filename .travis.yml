@@ -6,6 +6,10 @@ python:
   - "3.5"
   - "2.7"
 
+env:
+  - DB=sqlite
+  - DB=postgres
+
 install:
   - pip install coveralls
   - pip install tox
