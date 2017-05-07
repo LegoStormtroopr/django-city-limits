@@ -17,12 +17,12 @@ setup(
     long_description=README,
     url='https://github.com/LegoStormtroopr/django-limits/',
     author='Samuel Spencer',
-    author_email='sam@sqbl.org',
+    author_email='sam@aristotlemetadata.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GPL License',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         # Replace these appropriately if you are stuck on Python 2.
