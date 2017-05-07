@@ -80,11 +80,12 @@ class Limiter(object):
     def get_lhs_value(self, instance, join):
         value = instance
 
-        lookup = None
         for lookup in LOOKUPS.keys():
             if join.endswith('__%s' % lookup):
                 join, lookup = join.rsplit('__', 1)
                 break
+        else:
+            lookup = 'exact'
 
         for jump in join.split('__'):
             value = getattr(value, jump)
