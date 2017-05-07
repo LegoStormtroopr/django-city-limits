@@ -9,7 +9,7 @@ SECRET_KEY = 'sorry_tina_turner_and_hugh_laurie'
 MODEL_LIMIT_CLASS = 'django_limits.tests.limiter.NutbushLimiter'
 
 if os.environ.get('DB') == 'postgres':
-    DATABASES = { 
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'aristotle_test_db',
@@ -26,4 +26,3 @@ elif os.environ.get('DB') == 'sqlite':
             'NAME': 'test.db'
         }
     }
-
