@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
+
 class DjangoLimiterAppConfig(AppConfig):
     name = 'django_limits'
 
