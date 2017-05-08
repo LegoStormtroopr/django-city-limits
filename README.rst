@@ -11,7 +11,7 @@ enforce these kinds of restrictions.
 
     pip install django-city-limits
 
-1. Add ``django_limits`` to your ``INSTALLED_APPS``:
+1. Add ``django_limits`` to your ``INSTALLED_APPS``::
 
     INSTALLED APPS = [
         'django_limits',
@@ -22,7 +22,7 @@ enforce these kinds of restrictions.
 
     MODEL_LIMIT_CLASS = 'limiter.MyLimiter'
 
-3. Add the limiter middleware to properly render templates:
+3. Add the limiter middleware to properly render templates::
 
     MIDDLEWARE_CLASSES = [
         'django_limits.middleware.LimitExceededMiddleware',
@@ -41,7 +41,7 @@ as needed.
 
 The simplest limiter, is just an inheritance of this class, with a class attribute defining
 the limiting rules. A set of rules is a dictionary, with the key being a *model class*,
-and the associated values being a dictionary described below, or list of dictionaries, like so:
+and the associated values being a dictionary described below, or list of dictionaries, like so::
 
     from django_limits.limiter import Limiter
     from django.contrib.auth.models import User
@@ -74,7 +74,7 @@ A rules dictionary can contain the following keys:
 * ``filterset`` - A django Q filters that defines the types of models to restrict on, if this is not set the total number of the model in the database is used (e.g ``Model.objects.all()``)
 * ``template`` - The template used to render the page explaining the limit restriction, defaults to ``django_limits/limit_exceeded.html``
 
-An example rule is below for a widget is below.::
+An example rule is below for a widget is below::
 
     Widget: [
         {

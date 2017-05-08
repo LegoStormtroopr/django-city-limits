@@ -23,7 +23,7 @@ class NutbushLimiter(Limiter):
         Liquor: {
             'limit': 0,
             'message': "No whiskey for sale, you can't cop no bail",
-            'queryset': Q(name='Whiskey')
+            'filterset': Q(name='Whiskey')
         },
         Ration: [
             {
