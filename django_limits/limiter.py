@@ -30,10 +30,19 @@ class Limiter(object):
             for rule in rules:
                 qs = self.get_queryset(model, rule)
                 fs = self.get_filterset(rule)
-                if qs.count() >= rule['limit']:
-                    # If the filterset is None, we don't care about attributes
-                    # If there is a filterset, check this new instance matches
-                    if fs is None or self.instance_matches_filterset(instance, fs):
+
+                # If the filterset is None, we don't care about attributes
+                # If there is a filterset, check this new instance matches
+                matches = fs is None or self.instance_matches_filterset(instance, fs)
+                if matches:
+                    if instance.pk:
+                        # This instance exists and match the filterset, add one to the count for the matching entry
+                        offset = 1
+                    else:
+                        # This is a new object, just check how many already exist in the DB
+                        offset = 0
+
+                    if qs.count() + offset >= rule['limit']:
                         raise LimitExceeded(
                             model=model,
                             details=rule,
