@@ -9,11 +9,11 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-limits',
-    version="0.0.4",
+    version="0.0.5",
     packages=find_packages(),
     include_package_data=True,
     license='GPLv3 License',
-    description=README,
+    description="",
     long_description=README,
     url='https://github.com/LegoStormtroopr/django-limits/',
     author='Samuel Spencer',
