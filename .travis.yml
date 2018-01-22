@@ -1,24 +1,30 @@
-# Lets run on the new infrastructure
 sudo: false
 language: python
 python:
-  - "3.5"
-  - "2.7"
-
+- '3.5'
 env:
-  - DB=sqlite
-  - DB=postgres
-
+- DB=sqlite
+- DB=postgres
 before_script:
-  # Make a posgres database
-  - if [[ $DB == postgres ]]; then psql -c 'create database aristotle_test_db;' -U postgres; fi
-
+- if [[ $DB == postgres ]]; then psql -c 'create database aristotle_test_db;' -U postgres; fi
 install:
-  - pip install coveralls
-  - pip install tox
-
+- pip install coveralls tox
 script:
-  - tox --skip-missing-interpreters
-
+- tox --skip-missing-interpreters
 after_success:
-  - coveralls
+- coveralls
+
+jobs:
+  include:
+  - stage: deploy
+    script: skip
+    deploy:
+      provider: pypi
+      user: Samuel.Spencer
+      skip_upload_docs: true
+      password:
+        secure: ehaGAomPmICbl56Al5lK3XFmmgARvvCJMhbwdZBqz/TIogFQXJNtuoQ/6NoCgANaB8fUhQ0pTrVetrk5lRuOks3ZdUhpAKSYOQwlmmBZzluTVF+TNw4cmzpfGKig5qkOerBZy4Q7Q4xLNHeITrB6dWIF3uLY6DHHc0iE1NpwKr+Ens9e7Jreqz+9EYAx8BjSJhKvgYvGwY32BgiX6BZCQNlRGWv1T0RdUtftscOlV5TBI4GwtLANDHUNK0Hedd27ID+EbL5Ut10nIU8XT16mwJxyResVtV9GS3tu0piQ+AzYjsKb2rhFvy+wK+3uLwpMc3I5FJ0fHg+/AIg0wdcdq8MIkUSFPsfQh0ksCrAtVcq2cn+xKGmUfxG2jAWIRTyKEICOejVP1/hHIhGqWH3eWo5GUh4OaRwiVnv9QWD0qilh6pikLykKTW6GAJnQku8U0u3wanWpNjCbNG2snJKhU7zL3yMUdDXqKk86IApwmr6oHcAVTvoh2ciQtmbpGsBKkA8nTqNQmrmEtMyzExcGIzTGN79gExl4Uz1m12KnbCD4QOh9JvkXiVXmfjX5/HtQslA7YxASixbiiRQM0DtfC2j1OaFa55Y+QUA036DhR+h6FU9s+l2YvGxa6wW9p05lRP4pwKkz9GvAx/1sALB8W4f22sBWFgyAISlVYZXfwOg=
+      on:
+        branch: master
+        distributions: sdist bdist_wheel
+        repo: LegoStormtroopr/django-city-limits
