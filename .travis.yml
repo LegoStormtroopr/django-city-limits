@@ -2,30 +2,20 @@ sudo: false
 language: python
 python:
 - '3.5'
-- '2.7'
 env:
 - DB=sqlite
 - DB=postgres
 before_script:
-- if [[ $DB == postgres ]]; then psql -c 'create database aristotle_test_db;' -U postgres;
-  fi
+- if [[ $DB == postgres ]]; then psql -c 'create database aristotle_test_db;' -U postgres; fi
 install:
 - pip install coveralls tox
 script:
 - tox --skip-missing-interpreters
 after_success:
 - coveralls
+
 jobs:
   include:
-  - stage: testing
-    env:
-    - DB=sqlite
-    - DB=postgres
-    before_script:
-    - if [[ $DB == postgres ]]; then psql -c 'create database aristotle_test_db;'
-      -U postgres; fi
-    script:
-    - tox --skip-missing-interpreters
   - stage: deploy
     script: skip
     deploy:
