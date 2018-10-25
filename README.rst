@@ -7,9 +7,9 @@ For example, the number of active users, the number of posts per user, or the nu
 This django module allows you to easily setup predefined, hardcoded limits to
 enforce these kinds of restrictions.
 
-0. Install ``django-city-limits`` from PyPI::
+0. Install ``django-limits`` from PyPI::
 
-    pip install django-city-limits
+    pip install django-limits
 
 1. Add ``django_limits`` to your ``INSTALLED_APPS``::
 
