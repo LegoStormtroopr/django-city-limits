@@ -42,7 +42,7 @@ class Limiter(object):
                         # This is a new object, just check how many already exist in the DB
                         offset = 0
 
-                    if qs.count() + offset >= rule['limit']:
+                    if qs.count() + offset > rule['limit']:
                         raise LimitExceeded(
                             model=model,
                             details=rule,
