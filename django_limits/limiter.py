@@ -36,13 +36,15 @@ class Limiter(object):
                 matches = fs is None or self.instance_matches_filterset(instance, fs)
                 if matches:
                     if instance.pk:
-                        # This instance exists and match the filterset, add one to the count for the matching entry
-                        offset = 1
-                    else:
-                        # This is a new object, just check how many already exist in the DB
+                        # This instance exists and match the filterset
                         offset = 0
+                    else:
+                        # This is a new object, add one to account for the new matching entry
+                        offset = 1
 
-                    if qs.count() + offset > rule['limit']:
+                    count_after_save = qs.count() + offset
+
+                    if count_after_save > rule['limit'] or rule['limit'] == 0:
                         raise LimitExceeded(
                             model=model,
                             details=rule,

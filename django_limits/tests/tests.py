@@ -8,6 +8,21 @@ class LimitsTestCase(TestCase):
         self.nutbush = models.City.objects.create(name='Nutbush')
         self.princeton = models.City.objects.create(name='New Jersey')
 
+    def test_horse_limits(self):
+        my_horse = models.Horse.objects.create(name='bessie', city=self.nutbush)
+        with self.assertRaises(LimitExceeded):
+            # Its a one horse town!
+            models.Horse.objects.create(name='bessie', city=self.nutbush)
+
+        models.Horse.objects.create(name='goldie', city=self.princeton)
+
+        my_horse.name = "seabiscuit"
+        my_horse.save()
+        
+        my_horse.refresh_from_db()
+        
+        self.assertEqual(my_horse.name, "seabiscuit")
+
     def test_house_limits(self):
         models.House.objects.create(name='church', city=self.nutbush)
         models.House.objects.create(name='gin', city=self.nutbush)
@@ -16,9 +31,9 @@ class LimitsTestCase(TestCase):
 
         with self.assertRaises(LimitExceeded):
             # Maximum of 4 valid houses in Nutbush!
-            models.House.objects.create(name='out', city=self.nutbush)
+            models.House.objects.create(name='dog', city=self.nutbush)
 
-        # Dr. House can be in princeton
+         # Dr. House can be in princeton
         dr = models.House.objects.create(name='Doctor Gregory', city=self.princeton)
 
         with self.assertRaises(LimitExceeded):
