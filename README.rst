@@ -18,7 +18,7 @@ enforce these kinds of restrictions.
         # All your other apps
     ]
 
-2. Create and set your limiter class (see below)
+2. Create and set your limiter class, add the python module path to this to the `MODEL_LIMIT_CLASS` in `settings.py` (see below)
 
     MODEL_LIMIT_CLASS = 'limiter.MyLimiter'
 
@@ -90,7 +90,7 @@ An example rule is below for a widget is below::
         {
             'limit': 30,
             'message': "Only 30 widgets allowed",
-            'template': "widgets/totla_widgets_exceeded.html'
+            'template': "widgets/total_widgets_exceeded.html'
         }
     ]
 
