@@ -20,7 +20,7 @@ enforce these kinds of restrictions.
 
 2. Create and set your limiter class, add the python module path to this to the `MODEL_LIMIT_CLASS` in `settings.py` (see below)
 
-    MODEL_LIMIT_CLASS = 'limiter.MyLimiter'
+    `MODEL_LIMIT_CLASS = 'limiter.MyLimiter'`
 
 3. Add the limiter middleware to properly render templates::
 
